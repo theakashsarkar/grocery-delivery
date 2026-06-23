@@ -7,7 +7,7 @@ import CartButton from "./navbar/CartButton";
 import UserMenu from "./navbar/UserMenu";
 
 const Navbar = () => {
-  const user = { name: "akash" };
+  const user = null;
   const { cartCount, setIsCartCount } = {
     cartCount: 5,
     setIsCartCount: (_data) => {},
@@ -15,8 +15,22 @@ const Navbar = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [userMenuOpen, setUserMenuOpen] = useState(false);
   const navigate = useNavigate();
+  const handleSearch = (e) => {
+    e.preventDefault();
+    const query = searchQuery.trim();
+    if (query) {
+      navigate(`/search?q=${encodeURIComponent(query)}`);
+      setSearchQuery("");
+    }
+  };
+
+  const handleLogout = () => {
+    setUserMenuOpen(false);
+    navigate("/");
+  };
+
   return (
-    <nav className="bg-white sticky top-0 z-50 border-b border-app-border">
+    <nav className="bg-white sticky top-0 z-50 border-b border-zinc-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16 gap-4">
         <Link
           to="/"
@@ -26,7 +40,11 @@ const Navbar = () => {
         </Link>
         <div className="w-full flex items-center justify-end gap-4 lg:gap-10">
           <NavLinks />
-          <SearchBar value={searchQuery} onChange={setSearchQuery} />
+          <SearchBar
+            value={searchQuery}
+            onChange={setSearchQuery}
+            handleSearch={handleSearch}
+          />
           <div className="flex items-center gap-3">
             <CartButton cartCount={cartCount} setIsCartCount={setIsCartCount} />
             <UserMenu
@@ -34,6 +52,7 @@ const Navbar = () => {
               userMenuOpen={userMenuOpen}
               onToggle={() => setUserMenuOpen((prev) => !prev)}
               onClose={() => setUserMenuOpen(false)}
+              handleLogout={handleLogout}
             />
           </div>
         </div>

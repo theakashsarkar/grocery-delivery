@@ -1,8 +1,11 @@
 import { SearchIcon } from "lucide-react";
 
-const SearchBar = ({ value, onChange }) => {
+const SearchBar = ({ value, onChange, handleSearch }) => {
   return (
-    <form className="hidden sm:flex flex-1 max-w-sm text-xs sm:text-sm">
+    <form
+      onSubmit={handleSearch}
+      className="hidden sm:flex flex-1 max-w-sm text-xs sm:text-sm"
+    >
       <div className="relative w-full">
         <SearchIcon className="absolute left-2.5 top-1/2 -translate-y-1/2 size-4 text-zinc-500" />
         <input

@@ -6,10 +6,12 @@ import {
   ArrowUpRightIcon,
   ShieldIcon,
   LogOutIcon,
+  MenuIcon,
+  XIcon,
 } from "lucide-react";
 import { Link } from "react-router-dom";
 
-const UserMenu = ({ user, userMenuOpen, onToggle, onClose }) => {
+const UserMenu = ({ user, userMenuOpen, onToggle, onClose, handleLogout }) => {
   return (
     <div className="relative">
       {user ? (
@@ -96,7 +98,10 @@ const UserMenu = ({ user, userMenuOpen, onToggle, onClose }) => {
               )}
               {user && (
                 <div>
-                  <button className="flex items-center gap-3 px-4 py-2.5 text-sm text-app-error hover:bg-red-50 w-full transition-colors">
+                  <button
+                    onClick={handleLogout}
+                    className="flex items-center gap-3 px-4 py-2.5 text-sm text-app-error hover:bg-red-50 w-full transition-colors"
+                  >
                     <LogOutIcon size={16} />
                     Logout
                   </button>
