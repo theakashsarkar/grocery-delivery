@@ -1,4 +1,136 @@
+import { useEffect, useState } from "react";
+import { Link, useSearchParams } from "react-router-dom";
+import { product } from "../data/product";
+import { categoriesData } from "../data/categories";
+import {
+  ChevronDownSquare,
+  HomeIcon,
+  SlidersHorizontalIcon,
+} from "lucide-react";
+
 const Products = () => {
-  return <h1>hello world</h1>;
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [products, setProducts] = useState();
+  const [totalPages, setTotalPages] = useState();
+  const [loading, setLoading] = useState();
+  const [mobileFiltersOpen, setMobileFiltersOpen] = useState();
+
+  const category = searchParams.get("category") || "";
+  const organic = searchParams.get("organic") || "";
+  const sort = searchParams.get("sort") || "";
+  const page = Number(searchParams.get("page")) || 1;
+  const minPrice = searchParams.get("minPrice") || "";
+  const maxPrice = searchParams.get("maxPrice") || "";
+
+  const fetchProducts = async () => {
+    setLoading(true);
+    setProducts(
+      product.filter((p) => p.category === category || category === ""),
+    );
+    setLoading(false);
+  };
+
+  const updateFilter = (key, value) => {
+    if (!key) return;
+    const newParams = new URLSearchParams(searchParams);
+    if (value === null || value === "") {
+      newParams.delete(key);
+      return;
+    }
+    if (key !== "page") {
+      newParams.delete("page");
+    }
+    newParams.set(key, value);
+    setSearchParams(newParams);
+  };
+  const clearsFilter = () => setSearchParams({});
+  const activeCategory = categoriesData.find((c) => c.slug === category);
+  const hasFilters = category || organic || minPrice || maxPrice;
+
+  useEffect(() => {
+    fetchProducts();
+  }, [category, organic, sort, page, minPrice, maxPrice]);
+
+  return (
+    <div className="min-h-green bg-orange-50">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+        <nav className="flex items-center gap-2 text-sm text-app-text-light mb-6">
+          <Link to="/" className="hover:text-green-200 transition-colors">
+            <HomeIcon className="size-4" />
+          </Link>
+          <span>/</span>
+          <span className="text-app-green font-medium">
+            {activeCategory ? activeCategory.name : "All Product"}
+          </span>
+        </nav>
+        <div className="flex gap-8 xl:gap-10">
+          <aside className="hidden lg:block w-64 shrink-0">
+            <div className="bg-white rounded-2xl p-4 sticky top-24">
+              <div className="space-y-6">
+                <div>
+                  <h3 className="text-sm font-semibold text-app-green mb-3">
+                    Categories
+                  </h3>
+                  <div className="space-y-1.5"></div>
+                </div>
+                <div></div>
+              </div>
+            </div>
+          </aside>
+          <main className="flex-1">
+            <div className="flex items-center justify-between mb-6">
+              <div>
+                <h1 className="text-2xl font-semibold text-app-green">
+                  {activeCategory ? activeCategory.name : "All Product"}
+                </h1>
+                <p className="text-sm text-app-text-light mt-0.5">
+                  {products.length} Product Found
+                </p>
+              </div>
+              <div className="flex flex-col lg:items-center gap-3">
+                <button
+                  onClick={() => setMobileFiltersOpen(true)}
+                  className="lg:hidden flex items-center gap-2 px-3 py-2 text-sm bg-white rounded-xl border border-app-border hover:bg-app-cream transition-colors"
+                >
+                  <SlidersHorizontalIcon className="size-4" /> Filters
+                </button>
+                <div className="relative">
+                  <select
+                    value={sort}
+                    onChange={(e) => updateFilter("sort", e.target.value)}
+                    className="appearance-none pl-3 pr-8 py-2 text-sm bg-white rounded-xl border border-app-border focus:border-app-green outline-none cursor-pointer"
+                  >
+                    <option value="">Newest</option>
+                    <option value="price_asc">Price: Low - High</option>
+                    <option value="price_dsc">Price: High - Low </option>
+                    <option value="rating">Top Rated</option>
+                    <option value="name">A - Z</option>
+                  </select>
+                  <ChevronDownSquare className="absolute right-2.5 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-app-text-light pointer-events-none" />
+                </div>
+              </div>
+            </div>
+            {loading ? (
+              <p>Loading...</p>
+            ) : product.length === 0 ? (
+              <div className="text-center py-16">
+                <p className="text-lg font-semibold text-app-green mb-2">
+                  No Products Found
+                </p>
+                <p className="text-sm text-app-text-light mb-4">
+                  Try adjusting your filters or search terms
+                </p>
+                <button className="px-5 py-2 text-sm font-medium bg-app-green text-white rounded-xl hover:bg-app-green-light transition-colors">
+                  Clear Filters
+                </button>
+              </div>
+            ) : (
+              <div></div>
+            )}
+          </main>
+        </div>
+      </div>
+    </div>
+  );
 };
 export default Products;

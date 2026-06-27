@@ -5,13 +5,11 @@ import NavLinks from "./navbar/NavLinks";
 import SearchBar from "./navbar/SearchBar";
 import CartButton from "./navbar/CartButton";
 import UserMenu from "./navbar/UserMenu";
+import { useCart } from "../context/CartContext";
 
 const Navbar = () => {
   const user = null;
-  const { cartCount, setIsCartCount } = {
-    cartCount: 5,
-    setIsCartCount: (_data) => {},
-  };
+  const { cartCount, setIsCartOpen } = useCart();
   const [searchQuery, setSearchQuery] = useState("");
   const [userMenuOpen, setUserMenuOpen] = useState(false);
   const navigate = useNavigate();
@@ -46,7 +44,7 @@ const Navbar = () => {
             handleSearch={handleSearch}
           />
           <div className="flex items-center gap-3">
-            <CartButton cartCount={cartCount} setIsCartCount={setIsCartCount} />
+            <CartButton cartCount={cartCount} setIsCartOpen={setIsCartOpen} />
             <UserMenu
               user={user}
               userMenuOpen={userMenuOpen}
