@@ -9,6 +9,7 @@ export const product = [
     discount: 7,
     price: 55,
     originalPrice: 60,
+    stock: 10,
     description: "Fresh milk, rich in calcium",
   },
   {
@@ -20,6 +21,7 @@ export const product = [
     reviews: 25,
     price: 180,
     originalPrice: 200,
+    stock: 10,
     description: "Sweet and juicy red apples",
   },
   {
@@ -31,17 +33,19 @@ export const product = [
     reviews: 18,
     price: 45,
     originalPrice: 50,
+    stock: 10,
     description: "Farm fresh tomatoes",
   },
   {
     id: 4,
-    category: "Bakery",
+    category: "bakery",
     name: "Brown Bread",
     image: "/products/gek3mmiig3lixlkpxks8.png",
     rating: 4.6,
     reviews: 32,
     price: 70,
     originalPrice: 80,
+    stock: 10,
     description: "Healthy whole wheat bread",
   },
   {
@@ -53,6 +57,7 @@ export const product = [
     reviews: 15,
     price: 120,
     originalPrice: 140,
+    stock: 10,
     description: "100% natural orange juice",
   },
   {
@@ -64,6 +69,7 @@ export const product = [
     reviews: 40,
     price: 30,
     originalPrice: 35,
+    stock: 10,
     description: "Crispy salted potato chips",
   },
 ];

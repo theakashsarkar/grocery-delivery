@@ -2,17 +2,20 @@ import { useEffect, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { product } from "../data/product";
 import { categoriesData } from "../data/categories";
+import ProductCart from "../components/ProductCart";
 import {
   ChevronDownSquare,
   HomeIcon,
   SlidersHorizontalIcon,
 } from "lucide-react";
+import Loading from "../components/Loading";
+import FilterPanel from "../components/FilterPanel";
 
 const Products = () => {
   const [searchParams, setSearchParams] = useSearchParams();
-  const [products, setProducts] = useState();
+  const [products, setProducts] = useState([]);
   const [totalPages, setTotalPages] = useState();
-  const [loading, setLoading] = useState();
+  const [loading, setLoading] = useState(true);
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState();
 
   const category = searchParams.get("category") || "";
@@ -66,15 +69,16 @@ const Products = () => {
         <div className="flex gap-8 xl:gap-10">
           <aside className="hidden lg:block w-64 shrink-0">
             <div className="bg-white rounded-2xl p-4 sticky top-24">
-              <div className="space-y-6">
-                <div>
-                  <h3 className="text-sm font-semibold text-app-green mb-3">
-                    Categories
-                  </h3>
-                  <div className="space-y-1.5"></div>
-                </div>
-                <div></div>
-              </div>
+              <FilterPanel
+                categories={categoriesData}
+                category={category}
+                organic={organic}
+                minPrice={minPrice}
+                maxPrice={maxPrice}
+                updateFilter={updateFilter}
+                clearFilter={clearsFilter}
+                hasFilter={hasFilters}
+              />
             </div>
           </aside>
           <main className="flex-1">
@@ -111,8 +115,8 @@ const Products = () => {
               </div>
             </div>
             {loading ? (
-              <p>Loading...</p>
-            ) : product.length === 0 ? (
+              <Loading />
+            ) : products.length === 0 ? (
               <div className="text-center py-16">
                 <p className="text-lg font-semibold text-app-green mb-2">
                   No Products Found
@@ -120,12 +124,42 @@ const Products = () => {
                 <p className="text-sm text-app-text-light mb-4">
                   Try adjusting your filters or search terms
                 </p>
-                <button className="px-5 py-2 text-sm font-medium bg-app-green text-white rounded-xl hover:bg-app-green-light transition-colors">
+                <button
+                  onClick={clearsFilter}
+                  className="px-5 py-2 text-sm font-medium bg-app-green text-white rounded-xl hover:bg-app-green-light transition-colors"
+                >
                   Clear Filters
                 </button>
               </div>
             ) : (
-              <div></div>
+              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 xl:gap-8">
+                {products.map(
+                  (product) =>
+                    product.stock > 0 && (
+                      <ProductCart key={product.id} product={product} />
+                    ),
+                )}
+              </div>
+            )}
+            {totalPages > 1 && (
+              <div className="flex-center gap-2 mt-16">
+                {Array.from({ length: totalPages }).map((_, i) => (
+                  <button
+                    key={i}
+                    onClick={() => {
+                      updateFilter("page", String(i + 1));
+                      scrollTo(0, 0);
+                    }}
+                    className={`size-9 rounded-lg text-sm font-medium transition-colors ${
+                      Number(page) === i + 1
+                        ? "bg-green-500 text-white"
+                        : "bg-white hover:bg-green-100"
+                    }`}
+                  >
+                    {i + 1}
+                  </button>
+                ))}
+              </div>
             )}
           </main>
         </div>
