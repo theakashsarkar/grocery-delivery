@@ -8,7 +8,7 @@ import UserMenu from "./navbar/UserMenu";
 import { useCart } from "../context/CartContext";
 
 const Navbar = () => {
-  const user = null;
+  const user = { name: "Akash" };
   const { cartCount, setIsCartOpen } = useCart();
   const [searchQuery, setSearchQuery] = useState("");
   const [userMenuOpen, setUserMenuOpen] = useState(false);

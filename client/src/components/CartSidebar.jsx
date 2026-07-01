@@ -71,7 +71,7 @@ const CartSidebar = () => {
                     <div className="flex items-center bg-gray-100 rounded-full p-1">
                       <button
                         onClick={() =>
-                          updateQuantity(item.product._id, item.quantity - 1)
+                          updateQuantity(item.product.id, item.quantity - 1)
                         }
                         className="flex items-center justify-center size-8 rounded-full bg-white shadow-sm hover:shadow transition cursor-pointer"
                       >
@@ -84,7 +84,7 @@ const CartSidebar = () => {
 
                       <button
                         onClick={() =>
-                          updateQuantity(item.product._id, item.quantity + 1)
+                          updateQuantity(item.product.id, item.quantity + 1)
                         }
                         className="flex items-center justify-center size-8 rounded-full bg-white shadow-sm hover:shadow transition cursor-pointer"
                       >
@@ -96,7 +96,7 @@ const CartSidebar = () => {
                         $ {(item.product.price * item.quantity).toFixed(2)}
                       </span>
                       <button
-                        onClick={() => removeFromCart(item.product._id)}
+                        onClick={() => removeFromCart(item.product.id)}
                         className="p-1 text-app-text-light hover:text-app-error transition-colors cursor-pointer"
                       >
                         <Trash2Icon className="size-4" />

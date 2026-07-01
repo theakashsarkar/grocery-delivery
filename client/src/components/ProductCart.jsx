@@ -8,7 +8,7 @@ const ProductCart = ({ product }) => {
   return (
     <div
       className="bg-white rounded-2xl overflow-hidden shadow hover:shadow-md transition-all duration-300 group animate-fade-in cursor-pointer"
-      onClick={() => navigate(`/products/${product._id}`)}
+      onClick={() => navigate(`/products/${product.id}`)}
     >
       <div className="relative aspect-square overflow-hidden">
         <img
@@ -35,7 +35,7 @@ const ProductCart = ({ product }) => {
               {product.rating}
             </span>
             <span className="text-xs text-app-text-light">
-              ({product.reviews})
+              ({product.reviewsCount})
             </span>
           </div>
         )}
