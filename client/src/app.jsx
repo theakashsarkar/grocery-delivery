@@ -10,8 +10,8 @@ import FlashDeals from "./pages/FlashDeals";
 import Checkout from "./pages/Checkout";
 import MyOrder from "./pages/MyOrder";
 import OrderTracking from "./pages/OrderTracking";
-import Addresses from "./pages/Addresses";
 import ProtectedRoute from "./components/ProtectedRoute";
+import AddressesContainer from "./components/address/AddressesContainer";
 
 const App = () => {
   return (
@@ -40,7 +40,7 @@ const App = () => {
             <Route path="checkout" element={<Checkout />} />
             <Route path="orders" element={<MyOrder />} />
             <Route path="orders/:id" element={<OrderTracking />} />
-            <Route path="addresses" element={<Addresses />} />
+            <Route path="addresses" element={<AddressesContainer />} />
           </Route>
         </Route>
       </Routes>
