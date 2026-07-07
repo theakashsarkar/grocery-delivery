@@ -7,11 +7,11 @@ import ProductsPages from "./pages/ProductPage";
 import Home from "./pages/Home";
 import SearchResult from "./pages/SearchResult";
 import FlashDeals from "./pages/FlashDeals";
-import Checkout from "./pages/Checkout";
 import MyOrder from "./pages/MyOrder";
 import OrderTracking from "./pages/OrderTracking";
 import ProtectedRoute from "./components/ProtectedRoute";
 import AddressesContainer from "./components/address/AddressesContainer";
+import CheckoutContainer from "./components/checkout/CheckoutContainer";
 
 const App = () => {
   return (
@@ -37,7 +37,7 @@ const App = () => {
           <Route path="search" element={<SearchResult />} />
           <Route path="deals" element={<FlashDeals />} />
           <Route element={<ProtectedRoute />}>
-            <Route path="checkout" element={<Checkout />} />
+            <Route path="checkout" element={<CheckoutContainer />} />
             <Route path="orders" element={<MyOrder />} />
             <Route path="orders/:id" element={<OrderTracking />} />
             <Route path="addresses" element={<AddressesContainer />} />

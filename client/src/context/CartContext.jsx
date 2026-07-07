@@ -13,15 +13,14 @@ export function CartProvider({ children }) {
 
   const addToCart = (product, quantity = 1) => {
     setItems((prev) => {
-      const existins = prev.find((item) => item.product.id === product.id);
-      if (existins) {
-        return prev.map((item) =>
-          item.product.id === product.id
-            ? { ...item, quantity: item.quantity + quantity }
-            : item,
-        );
-      }
-      return [...prev, { product, quantity }];
+      const isSameProduct = (item) => item.product.id === product.id;
+      const existing = prev.find(isSameProduct);
+      if (!existing) return [...prev, { product, quantity }];
+      return prev.map((item) =>
+        isSameProduct(item)
+          ? { ...item, quantity: item.quantity + quantity }
+          : item,
+      );
     });
     setIsCartOpen(true);
   };
