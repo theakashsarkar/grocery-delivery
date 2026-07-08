@@ -1,19 +1,23 @@
 import { useEffect, useState } from "react";
-import { useSearchParams } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import { useCart } from "../context/CartContext";
 import { dummyOrders } from "../data/orders";
 import Loading from "../components/Loading";
-import { PackageIcon } from "lucide-react";
+import { PackageIcon, Calendar } from "lucide-react";
 
 const MyOrder = () => {
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [activeTab, setActiveTab] = useState("all");
+  const [activeTab, setActiveTab] = useState("All");
   const [searchParams, setSearchParams] = useSearchParams();
   const tabs = ["All", "Placed", "Out for Delivery", "Delivered"];
   const { clearCart } = useCart();
   const fetchOrders = async () => {
-    setOrders(dummyOrders);
+    let filterOrders = dummyOrders;
+    if (activeTab !== "All") {
+      filterOrders = dummyOrders.filter((order) => order.status === activeTab);
+    }
+    setOrders(filterOrders);
     setLoading(false);
   };
   useEffect(() => {
@@ -60,7 +64,46 @@ const MyOrder = () => {
             </p>
           </div>
         ) : (
-          <div> </div>
+          <div className="space-y-4">
+            {orders.map((order) => (
+              <Link
+                key={order.id}
+                to={`/orders/${order.id}`}
+                className="block max-w-4xl bg-white rounded-2xl p-5 hover:shadow transition-all"
+              >
+                <div className="flex items-start justify-between mb-3">
+                  <div>
+                    <p className="text-sm font-medium text-green-600">
+                      Order #{order.id}
+                    </p>
+
+                    <div className="flex items-center gap-2 mt-1">
+                      <Calendar className="size-4" />
+
+                      <span className="text-xs text-gray-500">
+                        {order.date}
+                      </span>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <span className="px-4 py-1 text-xs font-medium rounded-full bg-blue-100 text-blue-700">
+                      Placed
+                    </span>
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-2 mb-3"></div>
+
+                <div className="flex justify-between items-center pt-3 text-sm">
+                  <span className="text-gray-500">Items: {order.items}</span>
+
+                  <span className="font-semibold text-green-600">
+                    ${order.total}
+                  </span>
+                </div>
+              </Link>
+            ))}
+          </div>
         )}
       </div>
     </div>
