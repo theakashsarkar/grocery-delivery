@@ -9,7 +9,6 @@ const SearchResult = () => {
   const [loading, setLoading] = useState(true);
   const [searchParams] = useSearchParams();
   const query = searchParams.get("q") || "";
-  console.log(products) 
   useEffect(() => {
     if (!query) return;
     setLoading(true);
