@@ -43,6 +43,13 @@ const App = () => {
             <Route path="addresses" element={<AddressesContainer />} />
           </Route>
         </Route>
+        <Route path="/admin" element={<AdminLayout />}>
+          <Route index element={<AdminDashboard />} />
+          <Route path="products" element={<AdminProducts />} />
+          <Route path="products/new" element={<AdminProductFrom />} />
+          <Route path="products/:id/edit" element={<AdminProductFrom />} />
+          <Route path="orders" element={<AdminOrders />} />
+        </Route>
       </Routes>
     </>
   );
