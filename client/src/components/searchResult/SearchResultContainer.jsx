@@ -16,6 +16,7 @@ const filteredProduct = product.filter((pro) => pro.name.toLowerCase().includes(
     setProducts(filteredProduct);
     setLoading(false)
   },[query])
+  console.log(query, products)
   return (
     <SearchResult
       loading={loading}
