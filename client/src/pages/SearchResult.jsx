@@ -1,6 +1,7 @@
 import Loading from '../components/Loading'
 import ProductCart from '../components/ProductCart'
 import Breadcrumb from "../components/Breadcrumb";
+import {Link} from "react-router-dom"
 import {HomeIcon, SearchIcon} from "lucide-react"
 const SearchResult = ({loading, products, query}) => {
   return (

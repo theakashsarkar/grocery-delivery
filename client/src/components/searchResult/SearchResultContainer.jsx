@@ -12,11 +12,10 @@ const SearchResultContainer = () => {
     if (!query) {
       return
     }
-    const filteredProduct = product.filter((pro) => pro.name.toLowerCase.includes(query.toLowerCase))
+const filteredProduct = product.filter((pro) => pro.name.toLowerCase().includes(query.toLowerCase()));
     setProducts(filteredProduct);
     setLoading(false)
   },[query])
-
   return (
     <SearchResult
       loading={loading}
