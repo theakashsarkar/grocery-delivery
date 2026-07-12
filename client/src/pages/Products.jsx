@@ -9,6 +9,7 @@ import {
   SlidersHorizontalIcon,
 } from "lucide-react";
 import Loading from "../components/Loading";
+import Breadcrumb from "../components/Breadcrumb";
 import FilterPanel from "../components/FilterPanel";
 
 const Products = () => {
@@ -57,15 +58,16 @@ const Products = () => {
   return (
     <div className="min-h-green bg-orange-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-        <nav className="flex items-center gap-2 text-sm text-app-text-light mb-6">
-          <Link to="/" className="hover:text-green-200 transition-colors">
-            <HomeIcon className="size-4" />
-          </Link>
-          <span>/</span>
-          <span className="text-app-green font-medium">
-            {activeCategory ? activeCategory.name : "All Product"}
-          </span>
-        </nav>
+        <>
+          <Breadcrumb>
+            <Breadcrumb.Item to="/">
+              <HomeIcon classNmae="size-4" />
+            </Breadcrumb.Item>
+            <Breadcrumb.Item active >
+              {activeCategory ? activeCategory.name : "All Product"}
+            </Breadcrumb.Item>
+          </Breadcrumb>
+        </>
         <div className="flex gap-8 xl:gap-10">
           <aside className="hidden lg:block w-64 shrink-0">
             <div className="bg-white rounded-2xl p-4 sticky top-24">

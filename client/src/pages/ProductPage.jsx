@@ -3,6 +3,7 @@ import { useCart } from "../context/CartContext";
 import { useEffect, useState } from "react";
 import { product } from "../data/product";
 import Loading from "../components/Loading";
+import Breadcrumb from "../components/Breadcrumb";
 import {
   ArrowLeftIcon,
   ArrowRightIcon,
@@ -58,29 +59,23 @@ const ProductsPages = () => {
   return (
     <div className="min-h-screen">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-        <nav className="flex items-center gap-2 text-sm text-app-text-light mb-6">
-          <Link to="/" className="hover:text-app-green transition-colors">
-            <HomeIcon className="size-4" />
-          </Link>
-          <span>/</span>
-          <Link
-            to="/products"
-            className="hover:text-app-green transition-colors"
-          >
-            Product
-          </Link>
-          <span>/</span>
-          <Link
-            to={`/product?category=${products.category}`}
-            className="hover:text-app-green transition-colors capitalize"
-          >
-            {cateoryLabel}
-          </Link>
-          <span>/</span>
-          <span className="text-app-green font-medium truncate max-w-[200px]">
-            {products.name}
-          </span>
-        </nav>
+        <>
+          <Breadcrumb>
+            <Breadcrumb.Item to="/">
+              <HomeIcon className="size-4" />
+            </Breadcrumb.Item>
+            <Breadcrumb.Item to="/products">
+              Products
+            </Breadcrumb.Item>
+            <Breadcrumb.Item to={`/product?category=${products.category}`}>
+              {cateoryLabel}
+            </Breadcrumb.Item>
+            <Breadcrumb.Item active>
+              {products.name}
+            </Breadcrumb.Item>
+          </Breadcrumb>
+
+        </>
         <button
           onClick={() => navigate(-1)}
           className="mb-6 flex items-center gap-1.5 text-sm text-app-text-light hover:text-app-green transition-colors cursor-pointer"

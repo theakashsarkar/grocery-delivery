@@ -15,22 +15,23 @@ const SearchResult = () => {
     setProducts(
       product.filter((pro) =>
         pro.name.toLowerCase().includes(query.toLowerCase()),
-      ), 
+      ),
     );
     setLoading(false);
   }, []);
   return (
     <div className="min-h-screen bg-app-cream">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-           <nav className="flex items-center gap-2 text-sm text-app-text-light mb-6">
-          <Link to="/" className="hover:text-green-200 transition-colors">
-            <HomeIcon className="size-4" />
-          </Link>
-          <span>/</span>
-          <span className="text-app-green font-medium">
-            Search Result
-          </span>
-        </nav>
+        <>
+          <Breadcrumb>
+            <Breadcrumb.Item to="/">
+              <HomeIcon classNmae="size-4" />
+            </Breadcrumb.Item>
+            <Breadcrumb.Item active >
+              Search Result
+            </Breadcrumb.Item>
+          </Breadcrumb>
+        </>
         <div className="mb-8">
           <h1 className="text-2xl font-semibold text-app-green mb-1">Result For "{query}"</h1>
           <p className="text-sm text-app-text-light">{loading ? "Searching..." : `${products.length} Items found`}</p>
