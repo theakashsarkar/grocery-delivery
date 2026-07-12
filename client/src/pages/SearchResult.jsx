@@ -1,24 +1,8 @@
-import { useState, useEffect } from "react";
-import { useSearchParams,Link } from "react-router-dom";
-import { product } from "../data/product";
 import Loading from '../components/Loading'
 import ProductCart from '../components/ProductCart'
+import Breadcrumb from "../components/Breadcrumb";
 import {HomeIcon, SearchIcon} from "lucide-react"
-const SearchResult = () => {
-  const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [searchParams] = useSearchParams();
-  const query = searchParams.get("q") || "";
-  useEffect(() => {
-    if (!query) return;
-    setLoading(true);
-    setProducts(
-      product.filter((pro) =>
-        pro.name.toLowerCase().includes(query.toLowerCase()),
-      ),
-    );
-    setLoading(false);
-  }, []);
+const SearchResult = ({loading, products, query}) => {
   return (
     <div className="min-h-screen bg-app-cream">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
@@ -37,7 +21,7 @@ const SearchResult = () => {
           <p className="text-sm text-app-text-light">{loading ? "Searching..." : `${products.length} Items found`}</p>
         </div>
         {loading ? (
-          <Loading /> 
+          <Loading />
         ): products.length === 0 ? (
           <div className="text-center py-16">
             <SearchIcon className="size-16 text-app-order mx-auto mb-4" />
