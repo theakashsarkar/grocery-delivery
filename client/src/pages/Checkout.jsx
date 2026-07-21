@@ -52,7 +52,7 @@ const Checkout = ({ loading, user, deliveryFee, tax, total, items }) => {
       });
     }
   });
-  console.log(total, tax);
+  console.log(total, tax)
 
   if (items.length === 0) {
     return (

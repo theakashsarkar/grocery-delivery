@@ -1,10 +1,7 @@
-import AdminSidebar from "../../components/adminSidebar/AdminSidebar"
-
+import AdminDashboardContainer from '../../components/admin/adminDashboard/AdminDashboardContainer.jsx'
 const AdminDashboard = () => {
   return (
-    <div className="flex flex-col h-full lg:flex-row gap-8 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 animate-fade-in">
-       <AdminSidebar />
-    </div>
+    <AdminDashboardContainer /> 
   )
 }
 export default AdminDashboard;
