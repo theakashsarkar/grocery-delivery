@@ -17,7 +17,6 @@ export class LoginUserUseCase {
     if (!email || !password) throw new Error("Please Provide all fields")
     const emailVO = new Email(email)
     const user = await this.userRepository.findByEmail(emailVO);
-    console.log("hello", user);
     if (!user) throw new Error("Invalid Email or Password")
     const isMatch = this.hashService.compare(password, user.password);
     if (!isMatch) throw new Error("Invalid Email or Password");
