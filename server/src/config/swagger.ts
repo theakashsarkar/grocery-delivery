@@ -1,5 +1,5 @@
 import { authPaths } from "../modules/auth/auth.docs";
-
+import { productPaths } from "../modules/product/product.docs";
 export const swaggerSpec = {
   openapi: "3.0.0",
   info: {
@@ -14,5 +14,6 @@ export const swaggerSpec = {
   ],
   paths: {
     ...authPaths,
+    ...productPaths,
   },
 };
