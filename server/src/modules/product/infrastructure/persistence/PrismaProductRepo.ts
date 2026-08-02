@@ -21,19 +21,7 @@ export class PrismaProductRepo implements ProductRepo {
   }
   async create(product: Product): Promise<Product> {
     const result = await prisma.product.create({
-      data: {
-        name: product.name,
-        description: product.description,
-        price: product.price,
-        originalPrice: product.originalPrice,
-        image: product.image,
-        category: product.category,
-        unit: product.unit,
-        stock: product.stock,
-        isOrganic: product.isOrganic,
-        rating: product.rating,
-        reviewCount: product.reviewCount,
-      }
+      data: ProductMapper.toPersistence(product)
     });
     return ProductMapper.toDomain(result);
   }

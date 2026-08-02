@@ -8,7 +8,7 @@ export interface ProductResponseDto {
   category: string,
   unit: string,
   stock: number,
-  isOriganic: boolean,
+  isOrganic: boolean,
   rating: number,
   reviewCount: number,
   discount: number

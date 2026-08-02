@@ -1,19 +1,23 @@
-import { Product } from "../../domain/entities/Product"
+import { Product, ProductProps } from "../../domain/entities/Product"
 export class ProductMapper {
-  static toDomain(data: any): Product {
-    return new Product(
-      data.id,
-      data.name,
-      data.description ?? "",
-      data.price,
-      data.originalPrice ?? 0,
-      data.image,
-      data.category,
-      data.unit ?? "piece",
-      data.stock ?? 0,
-      data.isOrganic ?? false,
-      data.rating ?? 0,
-      data.reviewCount ?? 0,
-    );
+  static toPersistence(product: Product): ProductProps {
+    return product.toPrimitives();
+  }
+
+  static toDomain(data: ProductProps): Product {
+    return new Product({
+      id: data.id,
+      name: data.name,
+      description: data.description ?? "",
+      price: data.price,
+      originalPrice: data.originalPrice ?? 0,
+      image: data.image,
+      category: data.category,
+      unit: data.unit ?? "piece",
+      stock: data.stock ?? 0,
+      isOrganic: data.isOrganic ?? false,
+      rating: data.rating ?? 0,
+      reviewCount: data.reviewCount ?? 0,
+    });
   }
 }
