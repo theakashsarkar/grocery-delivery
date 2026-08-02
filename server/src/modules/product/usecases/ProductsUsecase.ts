@@ -18,19 +18,26 @@ export class ProductsUsecase {
   private buildWhereClause(query: ProductFilters): IProductWhereInput {
 
     const { category, search, minPrice, maxPrice } = query;
+
     const where: IProductWhereInput = {};
+
     if (category && category !== "all") {
       where.category = category;
     }
+
     if (search) {
       where.name = { contains: search, mode: "insensitive" }
     }
+
     const hasPriceFilter = minPrice !== undefined || maxPrice !== undefined;
+
     if (!hasPriceFilter) return where;
+
     where.price = {
       ...(minPrice !== undefined && { gte: minPrice }),
       ...(maxPrice !== undefined && { lte: maxPrice }),
     };
+
     return where;
   }
   private buildOrderByClause(sort?: string): TProductOrderByInput {

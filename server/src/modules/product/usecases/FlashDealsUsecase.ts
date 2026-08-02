@@ -23,18 +23,7 @@ export class FlashDealUsecase {
 
   private toDiscountDto(product: Product): ProductWithDiscountDto {
     return {
-      id: product.id,
-      name: product.name,
-      description: product.description,
-      price: product.price,
-      originalPrice: product.originalPrice,
-      image: product.image,
-      category: product.category,
-      unit: product.unit,
-      stock: product.stock,
-      isOrganic: product.isOrganic,
-      rating: product.rating,
-      reviewCount: product.reviewCount,
+      ...product.toPrimitives(),
       discount: product.discountPercent
     }
   }
