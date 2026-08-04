@@ -5,9 +5,12 @@ import { CreateProductUsecase } from "./usecases/CreateProductUsecase";
 import { FlashDealUsecase } from "./usecases/FlashDealsUsecase";
 import { UploadProductImageUsecase } from "./usecases/UploadProductImageUsecase";
 import { ProductImageService } from "./infrastructure/service/ProductImageService";
+import admin from "../../shared/middleware/Admin";
+import { userRepository } from "../auth/container";
 const productRepository = new PrismaProductRepo();
 const cloudinaryStorage = new CloudinaryProductStorage();
 const productImageService = new ProductImageService(cloudinaryStorage);
+const adminMiddleware = admin(userRepository);
 const flashDeal = new FlashDealUsecase(
   productRepository
 );
@@ -24,3 +27,4 @@ export const productControllers =
     flashDeal,
     createProductUsecase,
   )
+export { adminMiddleware }
