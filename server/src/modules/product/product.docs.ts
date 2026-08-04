@@ -36,6 +36,11 @@ export const productPaths = {
     post: {
       tags: ["Products"],
       summary: "Create a new product",
+      security: [
+        {
+          bearerAuth: [],
+        },
+      ],
       requestBody: {
         required: true,
         content: {
