@@ -20,8 +20,7 @@ export class LoginUserUseCase {
     if (!user) throw new Error("Invalid Email or Password")
     const isMatch = this.hashService.compare(password, user.password);
     if (!isMatch) throw new Error("Invalid Email or Password");
-    console.log(user.id)
-    const token = await this.tokenService.generateToken({ userId: user.id })
+    const token = await this.tokenService.generateToken({ id: user.id })
     const userData: any = { ...user };
     delete userData.password;
     userData.isAdmin = this.roleService.isAdmin(userData.email)
