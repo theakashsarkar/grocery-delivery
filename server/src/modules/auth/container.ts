@@ -6,7 +6,7 @@ import { BcryptService } from "./infrastructure/services/BcryptService";
 import { JwtService } from "../../infrastructure/services/JwtService";
 import { RoleService } from "../../infrastructure/services/RoleService";
 
-const userRepository = new PrismaUserRepository();
+export const userRepository = new PrismaUserRepository();
 const hashService = new BcryptService();
 const tokenService = new JwtService();
 const roleService = new RoleService();
