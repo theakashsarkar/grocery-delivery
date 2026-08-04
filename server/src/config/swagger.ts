@@ -12,6 +12,15 @@ export const swaggerSpec = {
       url: "http://localhost:5000/api/v1",
     },
   ],
+  components: {
+    securitySchemes: {
+      bearerAuth: {
+        type: "http",
+        scheme: "bearer",
+        bearerFormat: "JWT",
+      },
+    },
+  },
   paths: {
     ...authPaths,
     ...productPaths,
