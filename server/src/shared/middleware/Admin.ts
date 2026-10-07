@@ -7,6 +7,7 @@ const admin = (userRepository: UserRepository) => {
     const roleService = new RoleService;
     try {
       const userId = req.user?.id;
+      console.log(userId);
       if (!userId) {
         return res.status(401).json({
           message: "Unauthorized"

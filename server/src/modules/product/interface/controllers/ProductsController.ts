@@ -51,4 +51,8 @@ export class ProductsController {
       return res.status(400).json({ message: (err as Error).message });
     }
   }
+
+  update = async (req: MulterRequest, res: Response) => {
+
+  }
 }

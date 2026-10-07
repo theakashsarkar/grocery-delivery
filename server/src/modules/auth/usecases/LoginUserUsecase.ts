@@ -15,11 +15,14 @@ export class LoginUserUseCase {
   async execute(data: LoginUserDto) {
     const { email, password } = data;
     if (!email || !password) throw new Error("Please Provide all fields")
+
     const emailVO = new Email(email)
     const user = await this.userRepository.findByEmail(emailVO);
     if (!user) throw new Error("Invalid Email or Password")
-    const isMatch = this.hashService.compare(password, user.password);
+
+    const isMatch = await this.hashService.compare(password, user.password);
     if (!isMatch) throw new Error("Invalid Email or Password");
+
     const token = await this.tokenService.generateToken({ id: user.id })
     const userData: any = { ...user };
     delete userData.password;

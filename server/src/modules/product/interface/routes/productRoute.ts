@@ -6,6 +6,7 @@ const router = Router();
 
 router.get('/flash-deals', productControllers.getFlashDeal);
 router.post('/create', authMiddleware, adminMiddleware, productControllers.create);
+route.post("/:id", authMiddleware, adminMiddleware,)
 
 export default router;
 
