@@ -5,13 +5,16 @@ import AppLayout from "./pages/AppLayout";
 import Products from "./pages/Products";
 import ProductsPages from "./pages/ProductPage";
 import Home from "./pages/Home";
-import SearchResult from "./pages/SearchResult";
+import SearchResultContainer from "./components/searchResult/SearchResultContainer"
 import FlashDeals from "./pages/FlashDeals";
 import MyOrder from "./pages/MyOrder";
 import OrderTracking from "./pages/OrderTracking";
 import ProtectedRoute from "./components/ProtectedRoute";
 import AddressesContainer from "./components/address/AddressesContainer";
 import CheckoutContainer from "./components/checkout/CheckoutContainer";
+import AdminLayout from "./pages/admin/AdminLayout"
+import AdminDashboard from "./pages/admin/AdminDashboard"
+import AdminProducts from "./pages/admin/AdminProducts"
 
 const App = () => {
   return (
@@ -34,7 +37,7 @@ const App = () => {
           <Route index element={<Home />} />
           <Route path="products" element={<Products />} />
           <Route path="products/:id" element={<ProductsPages />} />
-          <Route path="search" element={<SearchResult />} />
+          <Route path="search" element={<SearchResultContainer />} />
           <Route path="deals" element={<FlashDeals />} />
           <Route element={<ProtectedRoute />}>
             <Route path="checkout" element={<CheckoutContainer />} />
@@ -46,9 +49,9 @@ const App = () => {
         <Route path="/admin" element={<AdminLayout />}>
           <Route index element={<AdminDashboard />} />
           <Route path="products" element={<AdminProducts />} />
-          <Route path="products/new" element={<AdminProductFrom />} />
-          <Route path="products/:id/edit" element={<AdminProductFrom />} />
-          <Route path="orders" element={<AdminOrders />} />
+          {/* <Route path="products/new" element={<AdminProductFrom />} /> */}
+          {/* <Route path="products/:id/edit" element={<AdminProductFrom />} /> */}
+          {/* <Route path="orders" element={<AdminOrders />} /> */}
         </Route>
       </Routes>
     </>

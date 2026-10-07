@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "commonjs",
+
+    "rootDir": "./src",
+    "outDir": "./dist",
+
+    "strict": true,
+
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true,
+
+    "moduleResolution": "node",
+
+    "resolveJsonModule": true,
+
+    "sourceMap": true
+  },
+  "include": ["src/**/*", "../:e server/src/modules/auth/infrastructure/persistence/PrismaUserRepository.ts"],
+  "exclude": ["node_modules", "dist"]
+}

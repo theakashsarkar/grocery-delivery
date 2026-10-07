@@ -1,0 +1,28 @@
+import { authPaths } from "../modules/auth/auth.docs";
+import { productPaths } from "../modules/product/product.docs";
+export const swaggerSpec = {
+  openapi: "3.0.0",
+  info: {
+    title: "Grocery Delivery API",
+    version: "1.0.0",
+    description: "Clean Architecture API",
+  },
+  servers: [
+    {
+      url: "http://localhost:5000/api/v1",
+    },
+  ],
+  components: {
+    securitySchemes: {
+      bearerAuth: {
+        type: "http",
+        scheme: "bearer",
+        bearerFormat: "JWT",
+      },
+    },
+  },
+  paths: {
+    ...authPaths,
+    ...productPaths,
+  },
+};
